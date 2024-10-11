@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResultActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="20dp"
+        android:paddingTop="80dp"
+        android:paddingRight="20dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@drawable/gray_background"
+            android:padding="20dp"
+            android:scaleType="fitCenter"
+            tools:ignore="MissingConstraints" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:layout_gravity="center_horizontal"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/percentageMatch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/gray_background"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ListView
+                    android:id="@+id/componentImagesList"
+                    android:layout_width="150dp"
+                    android:layout_height="500dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:divider="#00000000"
+                    android:dividerHeight="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="200dp" />
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/component"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="130dp"
+                android:layout_marginEnd="5dp"
+                android:paddingBottom="200dp"
+                android:divider="#00000000"
+                android:dividerHeight="15dp"
+                android:gravity="center"
+                android:orientation="vertical" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
