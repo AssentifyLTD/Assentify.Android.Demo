@@ -69,7 +69,7 @@ class ScanIDActivity : AppCompatActivity(), IDCardCallback {
 
     var image = "";
     override fun onComplete(dataModel: IDResponseModel, order: Int) {
-
+        Log.e("Events Here Scan ID", "onComplete" )
         dataModel.iDExtractedModel!!.outputProperties!!.forEach { t, u ->
 
             Log.e("Events Here Scan ID Page", "outputProperties Key" + t + " Value "+ u  )
@@ -120,7 +120,7 @@ class ScanIDActivity : AppCompatActivity(), IDCardCallback {
     }
 
     override fun onError(dataModel: BaseResponseDataModel) {
-
+        Log.e("Events Here Scan ID", "onError" )
     }
 
     override fun onFaceDetected(dataModel: BaseResponseDataModel) {
@@ -156,11 +156,11 @@ class ScanIDActivity : AppCompatActivity(), IDCardCallback {
     }
 
     override fun onRetry(dataModel: BaseResponseDataModel) {
-
+        Log.e("Events Here Scan ID", "onRetry" )
     }
 
     override fun onSend() {
-        Log.e("Events Here Scan ID Page ", "onSend")
+        Log.e("Events Here Scan ID", "onSend" )
     }
 
     override fun onStatusUpdated(dataModel: BaseResponseDataModel) {

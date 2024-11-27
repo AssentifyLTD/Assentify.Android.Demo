@@ -39,7 +39,8 @@ class FaceMatchActivity : AppCompatActivity() , FaceMatchCallback {
         val assentifySdk: AssentifySdk = AssentifySdkObject.getAssentifySdkObject();
         face = assentifySdk.startFaceMatch(
             this@FaceMatchActivity, // This activity implemented from from FaceMatchCallback
-           base64Image // Target  Image
+           base64Image , // Target  Image
+            true // Show 3 - 2 - 1 Count Down before  start scanning
         );
         face.startScanning()
        var fragmentManager = supportFragmentManager
@@ -60,6 +61,7 @@ class FaceMatchActivity : AppCompatActivity() , FaceMatchCallback {
 
     override fun onComplete(dataModel: FaceResponseModel) {
         Log.e("Events Here Face Page",dataModel.toString())
+        Log.e("Events Here Face Page", dataModel.faceExtractedModel!!.isLive!!.toString())
         Log.e("Events Here Face Page",dataModel.faceExtractedModel!!.secondImageFace!!)
         Log.e("Events Here Face Page",dataModel.faceExtractedModel!!.baseImageFace!!)
         Log.e("Events Here Face Page", dataModel.faceExtractedModel!!.percentageMatch!!.toString())
@@ -111,7 +113,7 @@ class FaceMatchActivity : AppCompatActivity() , FaceMatchCallback {
     }
 
     override fun onLivenessUpdate(dataModel: BaseResponseDataModel) {
-        
+
     }
 
     override fun onMrzDetected(dataModel: BaseResponseDataModel) {

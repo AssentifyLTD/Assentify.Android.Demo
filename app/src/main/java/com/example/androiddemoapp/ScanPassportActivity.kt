@@ -61,6 +61,7 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     }
 
     override fun onComplete(dataModel: PassportResponseModel) {
+        Log.e("Events Here Scan Passport Page","onComplete")
             //infoText.visibility = View.GONE
             Log.e("onComplete",dataModel.passportExtractedModel.toString())
             dataModel.passportExtractedModel!!.extractedData?.let { ExtractedModel.setExtractedModel(it) };
@@ -92,7 +93,7 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
 
 
     override fun onError(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onError")
     }
 
     override fun onFaceDetected(dataModel: BaseResponseDataModel) {
@@ -128,11 +129,11 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     }
 
     override fun onRetry(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onRetry")
     }
 
     override fun onSend() {
-        Log.e("Events Here Scan Passport Page ","onSend")
+        Log.e("Events Here Scan Passport Page","onSend")
         infoText.visibility = View.VISIBLE
     }
 

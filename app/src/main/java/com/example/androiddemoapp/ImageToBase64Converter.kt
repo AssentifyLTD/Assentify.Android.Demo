@@ -17,7 +17,7 @@ class ImageToBase64Converter() : AsyncTask<String, Void, String>() {
             connection.doInput = true
 
             // Add the X-Api-Key header
-            connection.setRequestProperty("X-Api-Key", "")
+            connection.setRequestProperty("X-Api-Key", "7UXZBSN2CeGxamNnp9CluLJn7Bb55lJo2SjXmXqiFULyM245nZXGGQvs956Fy5a5s1KoC4aMp5RXju8w")
 
             connection.connect()
             val input: InputStream = connection.inputStream

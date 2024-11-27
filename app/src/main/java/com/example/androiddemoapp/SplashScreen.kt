@@ -1,5 +1,6 @@
 package  com.example.androiddemoapp
 
+import LanguageTransformationModel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,9 @@ import android.widget.LinearLayout
 import com.assentify.sdk.AssentifySdk
 import com.assentify.sdk.AssentifySdkCallback
 import com.assentify.sdk.Core.Constants.EnvironmentalConditions
+import com.assentify.sdk.Core.Constants.Language
+import com.assentify.sdk.Core.Constants.LanguageTransformationEnum
+import com.assentify.sdk.LanguageTransformation.LanguageTransformationCallback
 import com.assentify.sdk.RemoteClient.Models.ConfigModel
 import com.assentify.sdk.RemoteClient.Models.StepDefinitions
 import com.assentify.sdk.RemoteClient.Models.TemplatesByCountry
@@ -31,19 +35,20 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
             00.0f,
             50.0f,
             100.0f,
-            "#61A03A",
+            "#61A03AAA",
             "#FFC400",
         );
 
+
+
         assentifySdk = AssentifySdk(
-            "",
-            "",
-            "",
+            "U2TR4SR5L0J5yN9dqpitGTlrGhmDg7FEr19D4smQGtUFLYdgs1wkbg6ObJFhw3dhKlmyFLEiQlKwcLMPZCauw",
+            "4b1697d7-e997-4ded-0e88-08db7d49a6b3",
+            "2EBE36B217A67436627C1DF61EE15B05FAEE1C0D7BBAA345864AF2FB4BB4773A",
             environmentalConditions,
             this,
             true,
-            true,
-            false,
+            true, false,
             true,
             true,
             true,
@@ -70,7 +75,11 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
             startActivity(intent)
         }
         otherClick.setOnClickListener {
-            val intent = Intent(this, ScanOtherActivity::class.java);
+         /*   val intent = Intent(this, ScanOtherActivity::class.java);
+            startActivity(intent)*/
+            val intent = Intent(this, FaceMatchActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.putExtra("image", "https://blob.assentify.com/v2/Document/_SrdlUIpP0jYqYNfaIbh_sq-7MIorreACzGIV4Q39Kc=/image.jpg")
             startActivity(intent)
         }
     }
@@ -105,10 +114,9 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
                 }
             }
         }
+
+
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }
