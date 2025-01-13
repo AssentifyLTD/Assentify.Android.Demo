@@ -75,6 +75,16 @@ class ScanOtherActivity : AppCompatActivity() , ScanOtherCallback {
             Log.e("MainActivity", "transformedProperties Key" + t + " Value "+ u  )
 
         }
+        dataModel.otherExtractedModel!!.additionalDetails!!.forEach { t, u ->
+
+            Log.e("MainActivity", "additionalDetails Key" + t + " Value "+ u  )
+
+        }
+        dataModel.otherExtractedModel!!.transformedDetails!!.forEach { t, u ->
+
+            Log.e("MainActivity", "transformedDetails Key" + t + " Value "+ u  )
+
+        }
     }
 
     override fun onDocumentCaptured(dataModel: BaseResponseDataModel) {

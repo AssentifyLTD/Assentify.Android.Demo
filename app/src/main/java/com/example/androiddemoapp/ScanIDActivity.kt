@@ -1,6 +1,5 @@
 package  com.example.androiddemoapp
 
-import IDExtractedModel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,15 +8,17 @@ import com.assentify.sdk.AssentifySdk
 import com.assentify.sdk.Core.Constants.Language
 import com.assentify.sdk.Core.Constants.MotionType
 import com.assentify.sdk.Core.Constants.ZoomType
+import com.assentify.sdk.ExtractedModel
 import com.assentify.sdk.FaceMatch.FaceMatchCallback
 import com.assentify.sdk.Models.BaseResponseDataModel
 import com.assentify.sdk.RemoteClient.Models.KycDocumentDetails
 import com.assentify.sdk.ScanIDCard.IDCardCallback
+import com.assentify.sdk.ScanIDCard.IDExtractedModel
 import com.assentify.sdk.ScanIDCard.IDResponseModel
 import com.assentify.sdk.ScanIDCard.ScanIDCard
 
 class ScanIDActivity : AppCompatActivity(), IDCardCallback {
-    var idExtractedModel:IDExtractedModel? = null;
+    var idExtractedModel: IDExtractedModel? = null;
     private lateinit var scanID:ScanIDCard;
     val outputPropertiesValues: MutableMap<String, String> = mutableMapOf()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +48,7 @@ class ScanIDActivity : AppCompatActivity(), IDCardCallback {
          scanID = assentifySdk.startScanIDCard(
             this@ScanIDActivity,// This activity implemented from from IDCardCallback
             data, // List<KycDocumentDetails> || Your selected template ||,
-            Language.Arabic ,// Optional the default is the doc language
+            Language.English ,// Optional the default is the doc language
         );
         var fragmentManager = supportFragmentManager
         var transaction = fragmentManager.beginTransaction()

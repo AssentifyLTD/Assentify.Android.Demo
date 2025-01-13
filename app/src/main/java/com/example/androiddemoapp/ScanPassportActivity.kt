@@ -73,12 +73,12 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
 
         dataModel.passportExtractedModel!!.outputProperties!!.forEach { t, u ->
 
-            Log.e("MainActivity", "outputProperties Key" + t + " Value "+ u  )
+            Log.e("Events Here Scan Passport Page", "outputProperties Key" + t + " Value "+ u  )
 
         }
         dataModel.passportExtractedModel!!.transformedProperties!!.forEach { t, u ->
 
-            Log.e("MainActivity", "transformedProperties Key" + t + " Value "+ u  )
+            Log.e("Events Here Scan Passport Page", "transformedProperties Key" + t + " Value "+ u  )
 
         }
     }
@@ -148,6 +148,15 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     override fun onUploadFailed(dataModel: BaseResponseDataModel) {
         
     }
+
+    override fun onEnvironmentalConditionsChange(
+        brightness: Double,
+        motion: MotionType,
+        zoom: ZoomType
+    ) {
+
+    }
+
 
 
     @SuppressLint("MissingSuperCall")

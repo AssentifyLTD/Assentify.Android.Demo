@@ -1,6 +1,5 @@
 package  com.example.androiddemoapp
 
-import ImageToBase64Converter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -42,13 +41,11 @@ class FaceMatchActivity : AppCompatActivity() , FaceMatchCallback {
            base64Image , // Target  Image
             true // Show 3 - 2 - 1 Count Down before  start scanning
         );
-        face.startScanning()
        var fragmentManager = supportFragmentManager
        var transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, face)
         transaction.addToBackStack(null) // Optional: Adds the transaction to the back stack
         transaction.commit()
-
     }
 
     override fun onCardDetected(dataModel: BaseResponseDataModel) {
@@ -80,7 +77,7 @@ class FaceMatchActivity : AppCompatActivity() , FaceMatchCallback {
         startActivity(intent)
         finish();
 
-        dataModel.faceExtractedModel!!.outputProperties?.let { OutputPropertiesModelFace.setOutputPropertiesModel(it) };
+       dataModel.faceExtractedModel!!.outputProperties?.let { OutputPropertiesModelFace.setOutputPropertiesModel(it) };
 
 
     }

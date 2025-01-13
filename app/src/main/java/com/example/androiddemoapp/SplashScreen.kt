@@ -1,6 +1,6 @@
 package  com.example.androiddemoapp
 
-import LanguageTransformationModel
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,12 +10,9 @@ import android.widget.LinearLayout
 import com.assentify.sdk.AssentifySdk
 import com.assentify.sdk.AssentifySdkCallback
 import com.assentify.sdk.Core.Constants.EnvironmentalConditions
-import com.assentify.sdk.Core.Constants.Language
-import com.assentify.sdk.Core.Constants.LanguageTransformationEnum
 import com.assentify.sdk.LanguageTransformation.LanguageTransformationCallback
 import com.assentify.sdk.RemoteClient.Models.ConfigModel
-import com.assentify.sdk.RemoteClient.Models.StepDefinitions
-import com.assentify.sdk.RemoteClient.Models.TemplatesByCountry
+import org.intellij.lang.annotations.Language
 
 class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
     private lateinit var assentifySdk: AssentifySdk
@@ -40,15 +37,16 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
         );
 
 
-
         assentifySdk = AssentifySdk(
-            "U2TR4SR5L0J5yN9dqpitGTlrGhmDg7FEr19D4smQGtUFLYdgs1wkbg6ObJFhw3dhKlmyFLEiQlKwcLMPZCauw",
-            "4b1697d7-e997-4ded-0e88-08db7d49a6b3",
-            "2EBE36B217A67436627C1DF61EE15B05FAEE1C0D7BBAA345864AF2FB4BB4773A",
+            "7UXZBSN2CeGxamNnp9CluLJn7Bb55lJo2SjXmXqiFULyM245nZXGGQvs956Fy5a5s1KoC4aMp5RXju8w",
+            "4232e33b-1a90-4b74-94a4-08dcab07bc4d",
+            "E893390F6835D4E1D2F12126B7AA2B0ED996C056C8893BA267A7FE90A8452200",
             environmentalConditions,
             this,
             true,
-            true, false,
+            true,
+            false,
+            true,
             true,
             true,
             true,
@@ -75,11 +73,7 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
             startActivity(intent)
         }
         otherClick.setOnClickListener {
-         /*   val intent = Intent(this, ScanOtherActivity::class.java);
-            startActivity(intent)*/
-            val intent = Intent(this, FaceMatchActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            intent.putExtra("image", "https://blob.assentify.com/v2/Document/_SrdlUIpP0jYqYNfaIbh_sq-7MIorreACzGIV4Q39Kc=/image.jpg")
+            val intent = Intent(this, ScanOtherActivity::class.java);
             startActivity(intent)
         }
     }
@@ -90,7 +84,6 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
 
     override fun onAssentifySdkInitSuccess(configModel: ConfigModel) {
         Log.e("Events Here onAssentifySdkInitSuccess", configModel.toString())
-
 
         AssentifySdkObject.setAssentifySdkObject(assentifySdk)
         StepDefinitionsModel.setStepDefinitionsModel(configModel.stepDefinitions)
@@ -119,4 +112,8 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
     }
 
 
+
 }
+
+
+

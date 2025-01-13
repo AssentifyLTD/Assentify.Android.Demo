@@ -37,7 +37,11 @@ class FaceKeys{
  }
 }
 
-
+class ContextAwareSigningKeys{
+ companion object {
+  const val DocumentURL = "OnBoardMe_ContextAwareSigning_DocumentURL"
+ }
+}
 
 class WrapUpKeys{
  companion object {
