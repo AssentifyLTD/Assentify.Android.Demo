@@ -38,9 +38,9 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
 
 
         assentifySdk = AssentifySdk(
-            "7UXZBSN2CeGxamNnp9CluLJn7Bb55lJo2SjXmXqiFULyM245nZXGGQvs956Fy5a5s1KoC4aMp5RXju8w",
-            "4232e33b-1a90-4b74-94a4-08dcab07bc4d",
-            "E893390F6835D4E1D2F12126B7AA2B0ED996C056C8893BA267A7FE90A8452200",
+            "",
+            "",
+            "",
             environmentalConditions,
             this,
             true,
