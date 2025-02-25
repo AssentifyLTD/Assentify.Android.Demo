@@ -28,10 +28,6 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
         val environmentalConditions = EnvironmentalConditions(
             true,
             true,
-            500.0f,
-            00.0f,
-            50.0f,
-            100.0f,
             "#61A03AAA",
             "#FFC400",
         );
