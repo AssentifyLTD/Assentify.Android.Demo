@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.assentify.sdk.AssentifySdk
+import com.assentify.sdk.Core.Constants.BrightnessEvents
 import com.assentify.sdk.Core.Constants.Language
 import com.assentify.sdk.Core.Constants.MotionType
 import com.assentify.sdk.Core.Constants.ZoomType
@@ -114,7 +115,7 @@ class ScanIDActivity : AppCompatActivity(), IDCardCallback {
     }
 
     override fun onEnvironmentalConditionsChange(
-        brightness: Double,
+        brightnessEvents: BrightnessEvents,
         motion: MotionType,
         zoom: ZoomType
     ) {

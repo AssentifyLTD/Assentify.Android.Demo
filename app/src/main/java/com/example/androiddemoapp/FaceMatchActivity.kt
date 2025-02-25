@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.assentify.sdk.AssentifySdk
+import com.assentify.sdk.Core.Constants.BrightnessEvents
+import com.assentify.sdk.Core.Constants.FaceEvents
 import com.assentify.sdk.Core.Constants.MotionType
 import com.assentify.sdk.Core.Constants.ZoomType
 import com.assentify.sdk.FaceMatch.FaceMatch
@@ -90,7 +92,10 @@ class FaceMatchActivity : AppCompatActivity() , FaceMatchCallback {
         
     }
 
-    override fun onEnvironmentalConditionsChange(brightness: Double, motion: MotionType) {
+    override fun onEnvironmentalConditionsChange(brightnessEvents: BrightnessEvents,
+                                                 motion: MotionType,
+                                                 faceEvents: FaceEvents,
+                                                 zoomType: ZoomType) {
         runOnUiThread{
             infoText.visibility = View.VISIBLE
         }

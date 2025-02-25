@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.assentify.sdk.AssentifySdk
+import com.assentify.sdk.Core.Constants.BrightnessEvents
 import com.assentify.sdk.Core.Constants.Language
 import com.assentify.sdk.Core.Constants.MotionType
 import com.assentify.sdk.Core.Constants.ZoomType
@@ -150,7 +151,7 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     }
 
     override fun onEnvironmentalConditionsChange(
-        brightness: Double,
+        brightnessEvents: BrightnessEvents,
         motion: MotionType,
         zoom: ZoomType
     ) {
