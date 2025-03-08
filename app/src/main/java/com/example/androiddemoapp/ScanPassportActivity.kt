@@ -18,7 +18,6 @@ import com.assentify.sdk.Core.Constants.ZoomType
 import com.assentify.sdk.Models.BaseResponseDataModel
 import com.assentify.sdk.ScanPassport.PassportResponseModel
 import com.assentify.sdk.ScanPassport.ScanPassportCallback
-import java.lang.String
 import kotlin.Double
 import kotlin.Throwable
 import kotlin.let
@@ -42,8 +41,7 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     fun startAssentifySdk() {
         val assentifySdk: AssentifySdk = AssentifySdkObject.getAssentifySdkObject();
         val scanPassport = assentifySdk.startScanPassport(
-            this@ScanPassportActivity, // This activity implemented from from ScanPassportCallback
-            Language.Arabic // Optional the default is the doc language
+            this@ScanPassportActivity, // This activity implemented from from ScanPassportCallback // Optional the default is the doc language
         );
         fragmentManager = supportFragmentManager
         transaction = fragmentManager.beginTransaction()
@@ -85,11 +83,11 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     }
 
     override fun onDocumentCaptured(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onDocumentCaptured")
     }
 
     override fun onDocumentCropped(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onDocumentCropped")
     }
 
 
@@ -98,35 +96,35 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     }
 
     override fun onFaceDetected(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onFaceDetected")
     }
 
     override fun onFaceExtracted(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onFaceExtracted")
     }
 
     override fun onLivenessUpdate(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onLivenessUpdate")
     }
 
     override fun onMrzDetected(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onMrzDetected")
     }
 
     override fun onMrzExtracted(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onMrzExtracted")
     }
 
     override fun onNoFaceDetected(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onNoFaceDetected")
     }
 
     override fun onNoMrzDetected(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onNoMrzDetected")
     }
 
     override fun onQualityCheckAvailable(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onQualityCheckAvailable")
     }
 
     override fun onRetry(dataModel: BaseResponseDataModel) {
@@ -139,15 +137,15 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     }
 
     override fun onStatusUpdated(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onStatusUpdated")
     }
 
     override fun onUpdated(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onUpdated")
     }
 
     override fun onUploadFailed(dataModel: BaseResponseDataModel) {
-        
+        Log.e("Events Here Scan Passport Page","onUploadFailed")
     }
 
     override fun onEnvironmentalConditionsChange(
@@ -155,13 +153,11 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
         motion: MotionType,
         zoom: ZoomType
     ) {
-
     }
 
 
 
-    @SuppressLint("MissingSuperCall")
-    override fun onBackPressed() {
-        finish();
-    }
+
+
+
 }

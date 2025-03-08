@@ -114,12 +114,7 @@ class ScanIDActivity : AppCompatActivity(), IDCardCallback {
 
     }
 
-    override fun onEnvironmentalConditionsChange(
-        brightnessEvents: BrightnessEvents,
-        motion: MotionType,
-        zoom: ZoomType
-    ) {
-    }
+
 
     override fun onError(dataModel: BaseResponseDataModel) {
         Log.e("Events Here Scan ID", "onError" )
@@ -185,4 +180,10 @@ class ScanIDActivity : AppCompatActivity(), IDCardCallback {
         return originalMap.filterValues { it is String }.mapValues { it.value as String }
     }
 
+    override fun onEnvironmentalConditionsChange(
+        brightnessEvents: BrightnessEvents,
+        motion: MotionType,
+        zoom: ZoomType
+    ) {
+    }
 }

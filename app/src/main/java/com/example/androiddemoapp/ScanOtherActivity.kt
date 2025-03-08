@@ -96,12 +96,6 @@ class ScanOtherActivity : AppCompatActivity() , ScanOtherCallback {
         
     }
 
-    override fun onEnvironmentalConditionsChange(
-        brightnessEvents: BrightnessEvents,
-        motion: MotionType,
-        zoom: ZoomType
-    ) {
-    }
 
     /// ... etc
 
@@ -153,4 +147,10 @@ class ScanOtherActivity : AppCompatActivity() , ScanOtherCallback {
         
     }
 
+    override fun onEnvironmentalConditionsChange(
+        brightnessEvents: BrightnessEvents,
+        motion: MotionType,
+        zoom: ZoomType
+    ) {
+    }
 }

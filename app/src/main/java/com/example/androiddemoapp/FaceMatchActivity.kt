@@ -27,8 +27,8 @@ class FaceMatchActivity : AppCompatActivity(), FaceMatchCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan)
         image = intent.getStringExtra("image")!!
-        base64Image =
-            ImageToBase64Converter().execute(image).get()
+/*        base64Image =
+            ImageToBase64Converter().execute(image).get()*/
         Thread.sleep(1000)
         infoText = findViewById(R.id.infoTextTest)
         startAssentifySdk();
@@ -38,11 +38,15 @@ class FaceMatchActivity : AppCompatActivity(), FaceMatchCallback {
     /** FACE NATCH **/
     fun startAssentifySdk() {
         val assentifySdk: AssentifySdk = AssentifySdkObject.getAssentifySdkObject();
+        val image =
+            "https://storagetestassentify.blob.core.windows.net/userfiles/b096e6ea-2a81-44cb-858e-08dbcbc01489/ca0162f9-8cfe-409f-91d8-9c2d42d53207/4f445a214f5a4b7fa74dc81243ccf590/b19c2053-efae-42e8-8696-177809043a9c/ReadPassport/image.jpeg"
+        val base64Image =
+            ImageToBase64Converter().execute(image).get()
         face = assentifySdk.startFaceMatch(
-            this@FaceMatchActivity, // This activity implemented from from FaceMatchCallback
-            base64Image, // Target  Image
-            true // Show 3 - 2 - 1 Count Down before  start scanning
+            this, // This activity implemented from from FaceMatchCallback
+            base64Image, showCountDown = true // Target  Image
         );
+        Thread.sleep(1000)
         var fragmentManager = supportFragmentManager
         var transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, face)
@@ -96,21 +100,7 @@ class FaceMatchActivity : AppCompatActivity(), FaceMatchCallback {
 
     }
 
-    override fun onEnvironmentalConditionsChange(
-        brightnessEvents: BrightnessEvents,
-        motion: MotionType,
-        faceEvents: FaceEvents,
-        zoomType: ZoomType
-    ) {
-        runOnUiThread {
-            infoText.visibility = View.VISIBLE
-            infoText.text = "brightnessEvents ${brightnessEvents.toString()}\n" +
-                    "motion ${motion.toString()}\n" +
-                    "faceEvents ${faceEvents.toString()}\n" +
-                    "zoomType ${zoomType.toString()}\n"
 
-        }
-    }
 
 
     override fun onError(dataModel: BaseResponseDataModel) {
@@ -169,4 +159,11 @@ class FaceMatchActivity : AppCompatActivity(), FaceMatchCallback {
 
     }
 
+    override fun onEnvironmentalConditionsChange(
+        brightnessEvents: BrightnessEvents,
+        motion: MotionType,
+        faceEvents: FaceEvents,
+        zoom: ZoomType
+    ) {
+    }
 }

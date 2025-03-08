@@ -3,11 +3,11 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+// Load keystore properties
+
 android {
     namespace = "com.example.androiddemoapp"
     compileSdk = 34
-
-
 
     packaging {
         resources {
@@ -29,35 +29,52 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            keyAlias = "demo"
+            keyPassword = "00000000"
+            storeFile = file("release-key.jks")
+            storePassword = "00000000"
+        }
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = true
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -66,7 +83,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.1")
     implementation("androidx.activity:activity-compose:1.9.0")
@@ -86,8 +102,5 @@ dependencies {
 
     // Assentify
     implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("com.github.AssentifyLTD:Assentify.SDK.Android:TAG")
-
-
-
+    implementation("com.github.AssentifyLTD:Assentify.SDK.Android:0.0.63")
 }
