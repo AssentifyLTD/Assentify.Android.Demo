@@ -5,7 +5,10 @@
     <style name="Theme.Example" parent="android:Theme.Material.Light.NoActionBar" />
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
-    <style name="Theme.Material3.DayNight.NoActionBar" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
     </style>
+<!--    <style name="Theme.Material3.DayNight.NoActionBar" parent="Theme.Material3.DayNight.NoActionBar">
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+    </style>-->
 </resources>

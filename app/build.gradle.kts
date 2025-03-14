@@ -31,7 +31,7 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = "demo"
+            keyAlias = "release-key"
             keyPassword = "00000000"
             storeFile = file("release-key.jks")
             storePassword = "00000000"
@@ -41,7 +41,7 @@ android {
     buildTypes {
         debug {
             isMinifyEnabled = true
-            isShrinkResources = false
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -102,5 +102,5 @@ dependencies {
 
     // Assentify
     implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("com.github.AssentifyLTD:Assentify.SDK.Android:0.0.63")
+    implementation("com.github.AssentifyLTD:Assentify.SDK.Android:TAG")
 }
