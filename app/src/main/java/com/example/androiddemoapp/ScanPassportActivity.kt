@@ -41,7 +41,7 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     fun startAssentifySdk() {
         val assentifySdk: AssentifySdk = AssentifySdkObject.getAssentifySdkObject();
         val scanPassport = assentifySdk.startScanPassport(
-            this@ScanPassportActivity, // This activity implemented from from ScanPassportCallback // Optional the default is the doc language
+            this@ScanPassportActivity, language = Language.Arabic// This activity implemented from from ScanPassportCallback // Optional the default is the doc language
         );
         fragmentManager = supportFragmentManager
         transaction = fragmentManager.beginTransaction()

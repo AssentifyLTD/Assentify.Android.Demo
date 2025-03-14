@@ -85,7 +85,7 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
         passportClick.visibility = View.VISIBLE
         idClick.visibility = View.VISIBLE
         otherClick.visibility = View.VISIBLE
-        loadingText.visibility = View.GONE
+        loadingText.visibility = View.VISIBLE
 
         val templates = assentifySdk.getTemplates();
 
@@ -98,7 +98,7 @@ class SplashScreen : AppCompatActivity(), AssentifySdkCallback {
                 t.kycDocumentDetails.forEach { h ->
                     println("HasTemplates name : " + h.name)
                     println("HasTemplates order : " + h.order)
-                    println("HasTemplates templateSpecimen : " + h.templateSpecimen)
+                    println("HasTemplates templateSpecimen : " + h.templateProcessingKeyInformation)
                 }
             }
         }
