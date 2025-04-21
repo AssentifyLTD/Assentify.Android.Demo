@@ -30,6 +30,19 @@ object OutputPropertiesModel {
 
 }
 
+object NfcFaceUrlModel {
+    private lateinit var url: String;
+    fun setUrl(url: String) {
+        this.url = url;
+    }
+
+    fun getUrl() : String{
+        return this.url
+    }
+
+}
+
+
 object OutputPropertiesModelFace {
     private lateinit var outputPropertiesModel:Map<String, Any>;
     fun setOutputPropertiesModel(extractedModel: Map<String, Any>) {

@@ -20,9 +20,10 @@ android {
         applicationId = "com.example.androiddemoapp"
         minSdk = 24
         targetSdk = 34
+
         versionCode = 1
         versionName = "1.0"
-
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
@@ -40,8 +41,8 @@ android {
 
     buildTypes {
         debug {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -102,5 +103,5 @@ dependencies {
 
     // Assentify
     implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("com.github.AssentifyLTD:Assentify.SDK.Android:TAG")
+    implementation("com.github.AssentifyLTD:Assentify.SDK.Android:0.0.68")
 }

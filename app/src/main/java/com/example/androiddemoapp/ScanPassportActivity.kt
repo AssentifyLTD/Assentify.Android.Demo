@@ -1,7 +1,10 @@
 package  com.example.androiddemoapp
+import android.provider.Settings
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent
 import android.content.Intent
+import android.nfc.NfcAdapter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,21 +15,27 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.assentify.sdk.AssentifySdk
 import com.assentify.sdk.Core.Constants.BrightnessEvents
+import com.assentify.sdk.Core.Constants.ConstantsValues
 import com.assentify.sdk.Core.Constants.Language
 import com.assentify.sdk.Core.Constants.MotionType
 import com.assentify.sdk.Core.Constants.ZoomType
 import com.assentify.sdk.Models.BaseResponseDataModel
+import com.assentify.sdk.ScanNFC.ScanNfc
+import com.assentify.sdk.ScanNFC.ScanNfcCallback
 import com.assentify.sdk.ScanPassport.PassportResponseModel
+import com.assentify.sdk.ScanPassport.ScanPassport
 import com.assentify.sdk.ScanPassport.ScanPassportCallback
 import kotlin.Double
 import kotlin.Throwable
 import kotlin.let
 
-class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
+class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback , ScanNfcCallback {
      lateinit var fragmentManager:FragmentManager ;
      lateinit var transaction:FragmentTransaction ;
-     lateinit var scanPassport:Fragment ;
+     lateinit var scanPassport:ScanPassport ;
      lateinit var infoText:TextView ;
+     private lateinit var scanNfc: ScanNfc
+     private var passportResponseModel: PassportResponseModel? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +43,35 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
 
         infoText = findViewById(R.id.infoText)
         //infoText.visibility = View.GONE
+        val assentifySdk: AssentifySdk = AssentifySdkObject.getAssentifySdkObject();
+        scanNfc = assentifySdk.startScanNfc(
+            this,// This activity implemented from ScanNfcCallback
+            languageCode = Language.Arabic,// Optional the default is the doc language
+            context = this// Context
+        )
+
+
+        if (scanNfc.isNfcSupported(activity = this)) {
+            if (scanNfc.isNfcEnabled(activity = this)) {
+                infoText.text = "NFC Supported on this device, And Enabled.";
+            } else {
+                infoText.text = "NFC Supported on this device, And not Enabled.";
+                val intent = Intent(Settings.ACTION_NFC_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            infoText.text = "NFC Not supported on this device.";
+        }
+
+
         startAssentifySdk();
     }
 
     /**PASSPORT**/
     fun startAssentifySdk() {
         val assentifySdk: AssentifySdk = AssentifySdkObject.getAssentifySdkObject();
-        val scanPassport = assentifySdk.startScanPassport(
-            this@ScanPassportActivity, language = Language.Arabic// This activity implemented from from ScanPassportCallback // Optional the default is the doc language
+         scanPassport = assentifySdk.startScanPassport(
+            this@ScanPassportActivity,
         );
         fragmentManager = supportFragmentManager
         transaction = fragmentManager.beginTransaction()
@@ -65,10 +95,7 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
             Log.e("onComplete",dataModel.passportExtractedModel.toString())
             dataModel.passportExtractedModel!!.extractedData?.let { ExtractedModel.setExtractedModel(it) };
             dataModel.passportExtractedModel!!.outputProperties?.let { OutputPropertiesModel.setOutputPropertiesModel(it) };
-            val intent = Intent(this, NavToFace::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            intent.putExtra("image",dataModel.passportExtractedModel!!.imageUrl)
-            startActivity(intent)
+
 
         dataModel.passportExtractedModel!!.outputProperties!!.forEach { t, u ->
 
@@ -80,6 +107,8 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
             Log.e("Events Here Scan Passport Page", "transformedProperties Key" + t + " Value "+ u  )
 
         }
+        passportResponseModel = dataModel;
+        scanPassport.stopScanning();
     }
 
     override fun onDocumentCaptured(dataModel: BaseResponseDataModel) {
@@ -156,7 +185,75 @@ class ScanPassportActivity : AppCompatActivity() ,  ScanPassportCallback {
     }
 
 
+    /** NFC **/
 
+
+    override fun onResume() {
+        super.onResume()
+        val adapter = NfcAdapter.getDefaultAdapter(this)
+        if (adapter != null) {
+            val intent = Intent(applicationContext, this.javaClass)
+            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            val pendingIntent =
+                PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
+            val filter = arrayOf(arrayOf(ConstantsValues.NfcTechTag))
+            adapter.enableForegroundDispatch(this, pendingIntent, null, filter)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val adapter = NfcAdapter.getDefaultAdapter(this)
+        adapter?.disableForegroundDispatch(this)
+    }
+
+    public override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        if (passportResponseModel != null) {
+            scanNfc.onActivityNewIntent(intent = intent, dataModel = passportResponseModel!!)
+        }
+    }
+
+
+    override fun onStartNfcScan() {
+        Log.e(
+            "Events Here",
+            "onStartNfcScan"
+        )
+    }
+
+    override fun onCompleteNfcScan(dataModel: PassportResponseModel) {
+        NfcFaceUrlModel.setUrl(dataModel.passportExtractedModel?.faces?.get(0)!!)
+        Log.e(
+            "Events Here",
+            dataModel.passportExtractedModel?.outputProperties.toString()
+        )
+        Log.e(
+            "Events Here",
+            dataModel.passportExtractedModel?.transformedProperties.toString()
+        )
+        Log.e(
+            "Events Here",
+            dataModel.passportExtractedModel?.extractedData.toString()
+        )
+        Log.e(
+            "Events Here",
+            dataModel.passportExtractedModel?.faces.toString()
+        )
+        val intent = Intent(this, NavToFace::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.putExtra("image",dataModel.passportExtractedModel!!.imageUrl)
+        startActivity(intent)
+
+
+    }
+
+    override fun onErrorNfcScan(dataModel: PassportResponseModel, message: String) {
+        Log.e(
+            "Events Here",
+            "onErrorNfcScan"
+        )
+    }
 
 
 
