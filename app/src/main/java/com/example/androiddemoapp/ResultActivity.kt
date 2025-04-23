@@ -72,7 +72,9 @@ class ResultActivity : AppCompatActivity(), SubmitDataCallback , ContextAwareSig
                 val values: MutableMap<String, String> = mutableMapOf()
                 outputPropertiesFaceModel.forEach { (key, value) ->
                     if (value.toString().isNotEmpty()) {
-                        if(key.contains(FaceKeys.BaseImage)){
+                        if(key.contains(FaceKeys.SecondImage)){
+                            Log.e("Events Here","BaseImage")
+                            Log.e("Events Here",NfcFaceUrlModel.getUrl())
                             values.put(key, NfcFaceUrlModel.getUrl())
                         }else{
                             values.put(key, value.toString())
@@ -160,7 +162,7 @@ class ResultActivity : AppCompatActivity(), SubmitDataCallback , ContextAwareSig
         val listData: MutableList<SubmitRequestModel> = mutableListOf()
         listData.add(sharedStepDefinitionsStepDoc!!)
         listData.add(sharedStepDefinitionsStepFace!!)
-//        listData.add(sharedStepDefinitionsSignature!!)
+       listData.add(sharedStepDefinitionsSignature!!)
         listData.add(wrapUp!!)
         listData.add(blockLoader!!)
 
