@@ -103,5 +103,5 @@ dependencies {
 
     // Assentify
     implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("com.github.AssentifyLTD:Assentify.SDK.Android:0.0.68")
+    implementation("com.github.AssentifyLTD:Assentify.SDK.Android:0.0.TAG")
 }
