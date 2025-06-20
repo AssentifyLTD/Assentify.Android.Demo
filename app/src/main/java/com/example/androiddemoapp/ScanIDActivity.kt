@@ -36,13 +36,15 @@ class ScanIDActivity : AppCompatActivity(), IDCardCallback {
                 name = "",
                 order = 0,
                 templateProcessingKeyInformation = "75b683bb-eb81-4965-b3f0-c5e5054865e7",
-                templateSpecimen = ""
+                templateSpecimen = "",
+                hasQrCode = false
             ),
             KycDocumentDetails(
                 name = "",
                 order = 1,
                 templateProcessingKeyInformation = "eae46fac-1763-4d31-9acc-c38d29fe56e4",
-                templateSpecimen = ""
+                templateSpecimen = "",
+                hasQrCode = false
             ),
         )
         val assentifySdk: AssentifySdk = AssentifySdkObject.getAssentifySdkObject();
